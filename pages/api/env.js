@@ -1,0 +1,22 @@
+const express = require('express');
+const dotenv = require('dotenv');
+
+const app = express();
+dotenv.config();
+
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  });
+  
+app.get('/api/env', (req, res, next) => {
+  res.json({ client_id, client_secret, refresh_token });
+});
+
+app.listen(3001, () => {
+  console.log('Server is listening on port 3001');
+});
