@@ -38,7 +38,7 @@
     "three": "^0.139.2"
   },
   "devDependencies": {
-    "@chakra-ui/core": "^0.8.0",
+    "@chakra-ui/core": "1.0.0-beta.2",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.15.0",
     "eslint-config-next": "^12.1.6",
