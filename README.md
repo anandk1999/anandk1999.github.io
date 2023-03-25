@@ -1,2 +1,2 @@
 # anandk1999.github.io
-![Alt text](../components/assets/website.png "Website Preview")
+![Alt text](./components/assets/website.png "Website Preview")
