@@ -27,10 +27,10 @@ const Page = () => {
                     />
                 </Box>
                 <Box borderRadius="lg" p={3} mb={10} align="center">
-                    <TypeAnimation
+                    {/* <TypeAnimation
                         cursor={false}
                         sequence={['Hey there, I\'m a Computer Science Student studying at Rutgers :)', 2000]}
-                    />
+                    /> */}
                 </Box>
             </Stack>
             <Section delay={0.1}>
