@@ -15,14 +15,14 @@ import {
 } from "@chakra-ui/react"
 import {HamburgerIcon} from "@chakra-ui/icons"
 import ThemeToggleButton from "../components/layouts/theme-toggle-button.js"
-import Logo from "./logo.js"
 import { IoLogoGithub, IoLogoLinkedin, IoHome } from 'react-icons/io5'
+import dynamic from "next/dynamic";
 
 const LinkItem = ({href, path, target, children, ...props}) => {
     const active = path===href
     const inactiveColor = useColorModeValue('gray200', 'whiteAlpha.900')
     return(
-        <NextLink href={href} passHref scroll={false}>
+        <NextLink href={href} passhref="true" scroll={false}>
             <Link p={2} bg={active ? 'glassTeal':undefined} color={active ? '#202023':inactiveColor} target={target} {...props}>
                 {children}
             </Link>
@@ -52,20 +52,23 @@ const Navbar = props => {
             justify="space-between"
             >
                 <Flex
-                    display={{ base: 'none', md: 'flex' }}
+                    display={{ base:'inline-flex', md: 'flex' }}
                     width={{ base: 'full', md: 'auto' }}
                     alignItems="center"
                     flexGrow={1}
                     mt={{ base: 4, md: 0 }}
                     align="left"
                 >
-                    <NextLink
+                    <LinkItem
                         href="/"
                         pl={2}
-                        passHref
+                        passhref="true"
+                        display="inline-flex"
+                        alignItems="center"
+                        style={{ gap: 4 }}
                     >
                         <IoHome size="30px"/>
-                    </NextLink>
+                    </LinkItem>
 
                     <LinkItem
                         target="_blank"
@@ -91,21 +94,21 @@ const Navbar = props => {
                         <IoLogoLinkedin size="30px"/>
                     </LinkItem>
                 </Flex>
-                <Box flex={1} align="right">
+                <Box flex={0} align="right" alignItems="center" display={{ base:'inline-flex', md: 'flex' }}>
                     <ThemeToggleButton />
-                    <Box ml={2} display={{base: "inline-block", md:"10px"}}>
+                    <Box ml={2} display={{base: "flex", md:"10px"}}>
                         <Menu>
                             <MenuButton as={IconButton} icon={<HamburgerIcon />} variant="solid" aria-label="Options" />
                             <MenuList>
-                                <NextLink href="/" passHref>
+                                <NextLink href="/" passhref="true">
                                     <MenuItem as={Link}>Home</MenuItem>
                                 </NextLink>
 
-                                <NextLink href="/projects" passHref>
+                                <NextLink href="/projects" passhref="true">
                                     <MenuItem as={Link}>Projects</MenuItem>
                                 </NextLink>
 
-                                <NextLink href="/music" passHref>
+                                <NextLink href="/music" passhref="true">
                                     <MenuItem as={Link}>Music</MenuItem>
                                 </NextLink>
                             </MenuList>
@@ -117,4 +120,4 @@ const Navbar = props => {
     )
 }
 
-export default Navbar
+export default dynamic (() => Promise.resolve(Navbar), {ssr: false})

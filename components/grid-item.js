@@ -11,6 +11,7 @@ const WorkGridItem = ({ children, id, title, thumbnail, link }) => {
          alt={title}
          className="grid-item-thumbnail"
          placeholder="blur"
+         blurDataURL="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
        />
        <NextLink href={link} pl={2} passHref>
          <Heading mt={2} fontSize={25} as="h3" variant="section-title">

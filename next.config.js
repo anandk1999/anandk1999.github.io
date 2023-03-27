@@ -4,5 +4,4 @@ module.exports = {
         loader:"akamai",
         path:"",
     },
-    assetPrefix: './',
 };
