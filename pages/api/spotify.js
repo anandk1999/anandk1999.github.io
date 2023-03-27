@@ -29,10 +29,6 @@ app.get('/api/env', (req, res, next) => {
 });
 
 const getAccessToken = async () => {
-  const data = await axios.get('https://anandk1999-music.onrender.com/api/env');
-  const client_id = data.data.client_id;
-  const client_secret = data.data.client_secret;
-  const refresh_token = data.data.refresh_token;
   const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
   const response = await axios.post(TOKEN_ENDPOINT, querystring.stringify({
     grant_type: 'refresh_token',

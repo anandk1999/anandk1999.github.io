@@ -8,7 +8,7 @@ const ADD_TRACKS_ENDPOINT = `https://api.spotify.com/v1/playlists/5TQwMBSiBWIkpG
 const SEARCH_TRACKS_ENDPOINT = `https://api.spotify.com/v1/search`;
 
 const getAccessToken = async () => {
-  const data = await axios.get('http://localhost:3001/api/env');
+  const data = await axios.get('https://anandk1999-music.onrender.com/api/env');
   const client_id = data.data.client_id;
   const client_secret = data.data.client_secret;
   const refresh_token = data.data.refresh_token;
