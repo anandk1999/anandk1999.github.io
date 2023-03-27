@@ -1,5 +1,4 @@
 import { Container, Box, Heading, Stack, useColorModeValue, Image, chakra } from "@chakra-ui/react"
-import TypeAnimation from "react-type-animation"
 import Section from "../components/section"
 import Timeline from "../components/Timeline"
 
