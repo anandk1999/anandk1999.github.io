@@ -1,5 +1,10 @@
-import querystring from 'querystring';
-import axios from 'axios';
+const querystring = require('querystring');
+const axios = require('axios');
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
 
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played`;
@@ -28,7 +33,7 @@ const getAccessToken = async () => {
   return response.json();
 };
 
-export const getNowPlaying = async () => {
+const getNowPlaying = async () => {
   const {access_token} = await getAccessToken();
   if (!access_token) {
     return null;
@@ -40,7 +45,7 @@ export const getNowPlaying = async () => {
   });
 };
 
-export const getRecentlyPlayed = async () => {
+const getRecentlyPlayed = async () => {
   const { access_token } = await getAccessToken();
   if (!access_token) {
     return null;
@@ -52,7 +57,7 @@ export const getRecentlyPlayed = async () => {
   });
 };
 
-export default async (_, res) => {
+app.get('/', async (_, res) => {
   const response = await getNowPlaying();
   if (response.status === 204 || response.status > 400) {
     const alt = await getRecentlyPlayed();
@@ -91,4 +96,8 @@ export default async (_, res) => {
     songUrl,
     title,
   });
-};
+});
+
+app.listen(3002, () => {
+  console.log('Server started on port 3002');
+});
