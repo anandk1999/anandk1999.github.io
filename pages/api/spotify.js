@@ -1,12 +1,6 @@
 import querystring from 'querystring';
-const dotenv = require('dotenv');
-dotenv.config();
+import axios from 'axios';
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
@@ -14,6 +8,9 @@ const ADD_TRACKS_ENDPOINT = `https://api.spotify.com/v1/playlists/5TQwMBSiBWIkpG
 const SEARCH_TRACKS_ENDPOINT = `https://api.spotify.com/v1/search`;
 
 const getAccessToken = async () => {
+  const { data } = await axios.get('http://localhost:3001/api/env');
+  const { client_id, client_secret, refresh_token } = data;
+  const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
   const response = await fetch(TOKEN_ENDPOINT, {
     method: 'POST',
     headers: {
