@@ -8,8 +8,10 @@ const ADD_TRACKS_ENDPOINT = `https://api.spotify.com/v1/playlists/5TQwMBSiBWIkpG
 const SEARCH_TRACKS_ENDPOINT = `https://api.spotify.com/v1/search`;
 
 const getAccessToken = async () => {
-  const { data } = await axios.get('http://localhost:3001/api/env');
-  const { client_id, client_secret, refresh_token } = data;
+  const data = await axios.get('https://anandk1999-music.onrender.com/api/env');
+  const client_id = data.data.client_id;
+  const client_secret = data.data.client_secret;
+  const refresh_token = data.data.refresh_token;
   const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
   const response = await fetch(TOKEN_ENDPOINT, {
     method: 'POST',
@@ -27,7 +29,7 @@ const getAccessToken = async () => {
 };
 
 export const getNowPlaying = async () => {
-  const { access_token } = await getAccessToken();
+  const {access_token} = await getAccessToken();
   if (!access_token) {
     return null;
   }
@@ -52,7 +54,6 @@ export const getRecentlyPlayed = async () => {
 
 export default async (_, res) => {
   const response = await getNowPlaying();
-  console.log(response);
   if (response.status === 204 || response.status > 400) {
     const alt = await getRecentlyPlayed();
     if (alt.status === 204 || alt.status > 400) {
@@ -74,6 +75,7 @@ export default async (_, res) => {
   }
 
   const song = await response.json();
+  console.log(song);
   const isPlaying = song.is_playing;
   const title = song.item.name;
   const artist = song.item.artists.map((_artist) => _artist.name).join(', ');
