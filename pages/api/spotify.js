@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/env', (req, res, next) => {
-res.json({ client_id, client_secret, refresh_token });
+  res.json({ client_id, client_secret, refresh_token });
 });
 
 const getAccessToken = async () => {
@@ -34,16 +34,14 @@ const getAccessToken = async () => {
   const client_secret = data.data.client_secret;
   const refresh_token = data.data.refresh_token;
   const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-  const response = await fetch(TOKEN_ENDPOINT, {
-    method: 'POST',
+  const response = await axios.post(TOKEN_ENDPOINT, querystring.stringify({
+    grant_type: 'refresh_token',
+    refresh_token,
+  }), {
     headers: {
       Authorization: `Basic ${basic}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: querystring.stringify({
-      grant_type: 'refresh_token',
-      refresh_token,
-    }),
   });
 
   return response.json();
@@ -54,7 +52,7 @@ const getNowPlaying = async () => {
   if (!access_token) {
     return null;
   }
-  return fetch(NOW_PLAYING_ENDPOINT, {
+  return axios.get(NOW_PLAYING_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
@@ -66,7 +64,7 @@ const getRecentlyPlayed = async () => {
   if (!access_token) {
     return null;
   }
-  return fetch(RECENTLY_PLAYED_ENDPOINT, {
+  return axios.get(RECENTLY_PLAYED_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
