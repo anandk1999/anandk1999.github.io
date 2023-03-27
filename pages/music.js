@@ -9,7 +9,7 @@ import { addTracks } from "./api/suggestions";
 
 const Music = () => {
     const fetcher = (url) => fetch(url).then((r) => r.json());
-    const { data } = useSWR('http://localhost:3002', fetcher);
+    const { data } = useSWR('https://anandk1999-music-status.onrender.com', fetcher);
     if (!data){
         const data = false
     }
