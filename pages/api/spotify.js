@@ -1,7 +1,6 @@
 const querystring = require('querystring');
 const axios = require('axios');
 const express = require('express');
-const cors = require('cors');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -13,7 +12,6 @@ const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
 const app = express();
-app.use(cors());
 
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played`;
