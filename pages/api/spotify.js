@@ -40,7 +40,8 @@ const getAccessToken = async () => {
     },
   });
 
-  return response.json();
+
+  return response.data;
 };
 
 const getNowPlaying = async () => {
@@ -74,7 +75,7 @@ app.get('/', async (_, res) => {
     if (alt.status === 204 || alt.status > 400) {
       return res.status(200).json({});
     }
-    const altSong = await alt.json();
+    const altSong = await alt.data;
     const parsed = JSON.parse(JSON.stringify(altSong));
     const title = parsed.items[0].track.album.name
     const artist = parsed.items[0].track.artists.map((_artist) => _artist.name).join(', ');

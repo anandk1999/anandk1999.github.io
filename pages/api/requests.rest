@@ -1,4 +1,4 @@
-GET https://anandk1999-music.onrender.com/
+GET http://localhost:3001/
 
 # GET https://anandk1999-music.onrender.com/api/env
 
