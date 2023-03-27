@@ -90,8 +90,7 @@ app.get('/', async (_, res) => {
       title,});
   }
 
-  const song = await response.json();
-  console.log(song);
+  const song = await response.data;
   const isPlaying = song.is_playing;
   const title = song.item.name;
   const artist = song.item.artists.map((_artist) => _artist.name).join(', ');
