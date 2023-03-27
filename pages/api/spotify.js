@@ -2,6 +2,15 @@ const querystring = require('querystring');
 const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const port = process.env.PORT || 3001;
+
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
 const app = express();
 app.use(cors());
@@ -11,6 +20,15 @@ const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const ADD_TRACKS_ENDPOINT = `https://api.spotify.com/v1/playlists/5TQwMBSiBWIkpGdVlfe2T0/tracks`;
 const SEARCH_TRACKS_ENDPOINT = `https://api.spotify.com/v1/search`;
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.get('/api/env', (req, res, next) => {
+res.json({ client_id, client_secret, refresh_token });
+});
 
 const getAccessToken = async () => {
   const data = await axios.get('https://anandk1999-music.onrender.com/api/env');
@@ -98,6 +116,6 @@ app.get('/', async (_, res) => {
   });
 });
 
-app.listen(3002, () => {
-  console.log('Server started on port 3002');
+app.listen(port, () => {
+  console.log('Server started on port 3001');
 });
