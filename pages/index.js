@@ -1,6 +1,7 @@
 import { Container, Box, Heading, Stack, useColorModeValue, Image, chakra } from "@chakra-ui/react"
 import Section from "../components/section"
 import Timeline from "../components/Timeline"
+import { TypeAnimation } from "react-type-animation"
 
 const Page = () => {   
     const borderColor = useColorModeValue('black', 'white');
@@ -26,10 +27,10 @@ const Page = () => {
                     />
                 </Box>
                 <Box borderRadius="lg" p={3} mb={10} align="center">
-                    {/* <TypeAnimation
+                    <TypeAnimation
                         cursor={false}
                         sequence={['Hey there, I\'m a Computer Science Student studying at Rutgers :)', 2000]}
-                    /> */}
+                    />
                 </Box>
             </Stack>
             <Section delay={0.1}>

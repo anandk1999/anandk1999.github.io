@@ -1,0 +1,15 @@
+.OrderedList {
+    position: relative;
+  }
+  .line {
+    position: absolute;
+    left: -1.5rem; /* adjust this value to fit your design */
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 0.25rem; /* adjust this value to fit your design */
+    background-color: blue; /* adjust this color to fit your design */
+    transition: top 0.2s ease-out; /* adjust the transition timing to fit your design */
+    z-index: -1;
+  }
+  
